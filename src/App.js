@@ -38,24 +38,24 @@ function Video(props) {
   )
 };
 
-const withLogic = Component => ({...props}) => {
+const withLogic = WrappedComponent => ({...props}) => {
   const views = props.views;
   if (views < 100) {
     return (
       <New>
-        <Component {...props} />
+        <WrappedComponent {...props} />
       </New>
     );
   } else if (views > 1000) {
     return (
       <Popular>
-        <Component {...props} />
+        <WrappedComponent {...props} />
       </Popular>
     );
   } else {
     return (
       <New>
-        <Component {...props} />
+        <WrappedComponent {...props} />
       </New>
     );
   }
@@ -63,11 +63,12 @@ const withLogic = Component => ({...props}) => {
 
 
 function List(props) {
+  const VideoWithLogic = withLogic(<Video/>);
   return props.list.map(item => {
     switch (item.type) {
       case 'video':
         return (
-          withLogic( <Video {...item} />)
+          <VideoWithLogic {...item} />
         );
 
       case 'article':
