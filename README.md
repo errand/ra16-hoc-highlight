@@ -1,7 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/n756kxse9n7hpcxc?svg=true)](https://ci.appveyor.com/project/errand/ra16-hoc-highlight)
 
-
-
 [GH-Pages](https://errand.github.io/ra16-hoc-highlight/)
 
 
