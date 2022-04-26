@@ -55,9 +55,7 @@ const withLogic = WrappedComponent => ({...props}) => {
     );
   } else {
     return (
-      <New>
-        <WrappedComponent {...props} />
-      </New>
+      <WrappedComponent {...props} />
     );
   }
 };
