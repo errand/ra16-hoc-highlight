@@ -9,7 +9,7 @@ function New(props) {
       {props.children}
     </div>
   )
-};
+}
 
 function Popular(props) {
   return (
@@ -18,7 +18,7 @@ function Popular(props) {
       {props.children}
     </div>
   )
-};
+}
 
 function Article(props) {
   return (
@@ -32,7 +32,7 @@ function Article(props) {
 function Video(props) {
   return (
     <div className="item item-video">
-      <iframe src={props.url} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe src={props.url} frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
       <p className="views">Просмотров: {props.views}</p>
     </div>
   )
@@ -61,42 +61,28 @@ const withLogic = WrappedComponent => ({...props}) => {
   }
 };
 
+const VideoWithLogic = withLogic(Video);
+const ArticleWithLogic = withLogic(Article);
+
 
 function List(props) {
-  const VideoWithLogic = withLogic(<Video/>);
-  return props.list.map(item => {
+  return props.list.map((item, index) => {
     switch (item.type) {
       case 'video':
         return (
-          <VideoWithLogic {...item} />
+          <VideoWithLogic key={index} {...item} />
         );
 
       case 'article':
-        if(item.views < 100) {
-          return (
-            <New>
-              <Article {...item} />
-            </New>
-          );
-        } else if(item.views > 1000) {
-          return (
-            <Popular>
-              <Article {...item} />
-            </Popular>
-          );
-        } else {
-          return (
-            <New>
-              <Article {...item} />
-            </New>
-          );
-        }
+        return (
+          <ArticleWithLogic key={index} {...item} />
+        );
     }
   });
-};
+}
 
 export default function App() {
-  const [list, setList] = useState([
+  const [list] = useState([
     {
       type: 'video',
       url: 'https://www.youtube.com/embed/rN6nlNC9WQA?rel=0&amp;controls=0&amp;showinfo=0',
